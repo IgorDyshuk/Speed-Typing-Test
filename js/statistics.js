@@ -1,6 +1,3 @@
-import {origin} from "./origin.js"
-
-
 function formatSeondsToHMS(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -79,7 +76,7 @@ function updateBestScores(data) {
 
 async function fetchAndUpdate() {
   try {
-    const response = await fetch(`${origin}/get_profile_information`, {
+    const response = await fetch(`https://partly-popular-airedale.ngrok-free.app/get_profile_information`, {
       method: "GET",
       credentials: "include",
     })
@@ -152,11 +149,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     await fetchAndUpdate();
 
-    transition.classList.add("active");
   } catch (error) {
     console.log("Error loading page:", error);
     transition.classList.remove("active");
-  }
+  }  finally {
+  transition.classList.add("active");
+}
 });
 
 

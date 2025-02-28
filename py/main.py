@@ -23,8 +23,11 @@ security = AuthX(config=config)
 
 origins = [
   "http://127.0.0.1:5501",
-  "http://localhost:5501",
-  "http://172.20.10.3:5501"
+  "https://igordyshuk.github.io",
+  "https://127.0.0.1:5501",
+  "http://127.0.0.1:56073",
+  "https://igordyshuk.github.io/Speed_Typing_Test/statistics.html"
+
 ]
 
 app.add_middleware(
@@ -74,6 +77,17 @@ def hash_password(password: str) -> str:
 
 def verify_password(password: str, hashed_password: str) -> bool:
   return pwd_context.verify(password, hashed_password)
+
+
+
+@app.options("/{full_path:path}")
+async def preflight_request(full_path: str, response: Response):
+  response.headers["Access-Control-Allow-Origin"] = "https://igordyshuk.github.io"
+  response.headers["Access-Control-Allow-Credentials"] = "true"
+  response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+  response.headers["Access-Control-Allow-Headers"] = "*"
+  return response
+
 
 
 @app.post("/register")
@@ -359,7 +373,6 @@ def update_typing_duration(typing_duration_data: TypingDurationSchema, request: 
       connection.close()
 
 
-
 @app.get("/get_profile_information")
 def get_profile_information(request: Request):
   token = request.cookies.get(config.JWT_ACCESS_COOKIE_NAME)
@@ -395,16 +408,16 @@ def get_profile_information(request: Request):
         "started_tests": started_tests,
         "completed_tests": completed_tests,
         "typing_duration": typing_duration,
-        "best_score" : {
-          "eng_words_15" : user_data[7],
-          "eng_words_30" : user_data[8],
-          "eng_words_60" : user_data[9],
-          "ukr_words_15" : user_data[10],
-          "ukr_words_30" : user_data[11],
-          "ukr_words_60" : user_data[12],
-          "ru_words_15" : user_data[13],
-          "ru_words_30" : user_data[14],
-          "ru_words_60" : user_data[15]
+        "best_score": {
+          "eng_words_15": user_data[7],
+          "eng_words_30": user_data[8],
+          "eng_words_60": user_data[9],
+          "ukr_words_15": user_data[10],
+          "ukr_words_30": user_data[11],
+          "ukr_words_60": user_data[12],
+          "ru_words_15": user_data[13],
+          "ru_words_30": user_data[14],
+          "ru_words_60": user_data[15]
         }
       }), media_type="application/json")
 
