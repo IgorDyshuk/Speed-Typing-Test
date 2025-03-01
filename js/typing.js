@@ -436,7 +436,7 @@ async function update_started_tests() {
 }
 
 
-document.addEventListener('keydown', handleKeyDown);
+document.getElementById("game").addEventListener('keydown', handleKeyDown);
 
 function handleKeyDown(e) {
   if (document.getElementById("game").classList.contains('over')) {
