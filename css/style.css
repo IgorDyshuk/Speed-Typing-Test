@@ -297,7 +297,7 @@ button:hover {
 
 .nav-bar {
   display: flex;
-  padding: 30px 150px;
+  padding: 30px clamp(0.625rem, -7.652027027027028rem + 18.91891891891892vw, 9.375rem);
   width: 100%;
   transition: all 0.15s ease-in-out;
 }
@@ -787,7 +787,7 @@ input[type="password"]::placeholder {
 /*to here*/
 
 main {
-  padding: 0 150px
+  padding: 0 clamp(0.625rem, -7.652027027027028rem + 18.91891891891892vw, 9.375rem)
 }
 
 #header {
@@ -907,8 +907,6 @@ main {
   background-color: var(--caret-color);
   border-radius: 2px;
   position: fixed;
-  top: 223px;
-  left: 158px;
   opacity: 1;
   animation: blink 1s infinite;
   transition: left 0.07s ease-in-out, opacity 0.15s ease-in-out;

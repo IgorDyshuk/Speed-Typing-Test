@@ -387,7 +387,26 @@ async function restGameUI() {
 }
 
 
+window.addEventListener('resize', updateCursorPosition);
+
+function updateCursorPosition() {
+  const cursor = document.getElementById("cursor");
+  const firstLetter = document.querySelector(".word .letter");
+
+  cursor.style.top = firstLetter.getBoundingClientRect().top + 4 + "px";
+  cursor.style.left = firstLetter.getBoundingClientRect().left - 1 + "px";
+}
+
+
+
 window.addEventListener('load', () => {
+  const cursor = document.getElementById("cursor");
+  const firstLetter = document.querySelector(".word .letter");
+
+  cursor.style.top = firstLetter.getBoundingClientRect().top + 4 + "px";
+  cursor.style.left = firstLetter.getBoundingClientRect().left - 1 + "px";
+  cursor.style.animation = "blink 1s infinite"
+
   const gameElement = document.getElementById("game")
   if (gameElement) {
     gameElement.focus()
